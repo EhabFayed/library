@@ -1,0 +1,21 @@
+<h1> all books we have </h1>
+<%= link_to "adding a new book to our library  ", new_book_path%>
+<p></p>
+<table>
+    <tr>
+    <th>bookname</th>
+    <th>author</th>
+    <th>description</th>
+    </tr>
+    <% @books.each do|book| %>
+    <tr>
+        <td><%= book.book%></td>
+        <td><%= book.author%></td>
+        <td><%= book.description%></td>
+        <td><%= link_to "edit", edit_book_path(book) %></td>
+        <td><%= link_to "show", book_path(book) %></td>
+        <td><%= link_to "delete", book_path(book), method: :delete, data: {confirm:"are u sure"} %></td>        
+    </tr>
+        <% end %>
+
+</table>

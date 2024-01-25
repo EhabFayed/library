@@ -1,0 +1,12 @@
+<h1> here is the inserted book </h1>
+<P>
+Book: <%= @book.book%>
+</p>
+<P>
+author: <%= @book.author%>
+</p>
+<P>
+description: <%= @book.description%>
+</p>
+<%= link_to"edit this book data", edit_book_path(@book)%><br>
+<%= link_to"back to all books we have ", books_path%>
