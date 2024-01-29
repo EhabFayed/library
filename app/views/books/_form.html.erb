@@ -6,21 +6,42 @@
     <% end %>
 </ul>
 <% end %>
-<%= form_for @book do |f| %>
-    <p>
-        <%= f.label :book %><br/>
-        <%= f.text_field :book %>
-    </p>
-    <p>
-    <%= f.label :author %><br/>
-    <%= f.text_field :author %>
-    </p>
-    <p>
-    <%= f.label :description %><br/>
-    <%= f.text_area :description %>
-    </p>
-    <p>
-     <%= f.submit %>
-     </p>
-     <% end %>
-     <%= link_to "all books we have", books_path%>
+
+<div class='row'>
+    <div class='col-xs-12'>
+        <%= form_for(@book, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+            <div class="form-group">
+                <div class ="control-label col-sm-2">
+                 <%= f.label :book %>
+                </div>
+                <div class="col-sm-8">
+                 <%= f.text_field :book, class: "form-control", placeholder: "book name " ,autofocus: true %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class ="control-label col-sm-2">
+                 <%= f.label :author %>
+                </div>
+                <div class="col-sm-8">
+                 <%= f.text_field :author,class: "form-control", placeholder: "author name " ,autofocus: true %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class ="control-label col-sm-2">           
+                 <%= f.label :description %><br/>
+                </div>
+                <div class="col-sm-8">
+                 <%= f.text_area :description,rows:10 ,class: "form-control", placeholder: "description " ,autofocus: true %> 
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <%= f.submit class: 'btn btn-primary btn-lg' %>
+                </div>
+            </div>
+        <% end %>
+        <div class ="col-xs-4 col-xs-offset-4">
+             [ <%= link_to "cancel request and return to  books we have", books_path%> ]
+        </div>
+    </div>
+</div>
