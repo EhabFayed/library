@@ -1,12 +1,14 @@
-<h1> here is the inserted book </h1>
-<P>
-Book: <%= @book.book%>
-</p>
-<P>
-author: <%= @book.author%>
-</p>
-<P>
-description: <%= @book.description%>
-</p>
-<%= link_to"edit this book data", edit_book_path(@book)%><br>
-<%= link_to"back to all books we have ", books_path%>
+<h2 align ="center">Book: <%= @book.book%></h2>
+<h4 class = "center"><strong>author:<%= @book.author%></strong></h4>
+
+<div class="well col-xs-8 col-xs-offset-2">
+    <h4 class = "center description"><strong>description:</strong></h4>
+    <hr>
+     <%= simple_format(@book.description)%>
+    <div class ="book-actions">
+      <%= link_to"edit this book data", edit_book_path(@book), class: "btn btn-xs btn-primary"%>
+      <%= link_to"delete this book data", book_path(@book),method: :delete, data: {confirm:"are u sure u wont delete this book"}, class: "btn btn-xs btn-danger"%>
+      <%= link_to"view all books ",books_path, class: "btn btn-xs btn-success"%>
+     
+    </div>
+</div
