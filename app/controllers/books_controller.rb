@@ -28,6 +28,7 @@ class BooksController < ApplicationController
         #show article after creation
         #redirect_to books_path(@book)
         @book=Book.new(book_params)
+        @book.user= User.first
         if @book.save 
             flash[:success] ="book has been added successfully"
             redirect_to book_path(@book)

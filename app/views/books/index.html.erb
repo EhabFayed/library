@@ -12,6 +12,11 @@
                 </div>
                 <div class "book-body">
                     <%= truncate(book.description,lenth:100)%>
+                    <div class="book-meta-details">
+                        <small>Created by:<%= book.user.username if book.user%>,
+                            <%= time_ago_in_words( book.created_at)%> ago,
+                            last updated: <%= time_ago_in_words(book.updated_at) %> ago</small>
+                    </div>
                 </div>
                 <div class ="book-actions">
                     <%= link_to"edit this book data", edit_book_path(book), class: "btn btn-xs btn-primary"%>
