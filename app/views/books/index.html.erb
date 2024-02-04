@@ -1,29 +1,3 @@
 <h1 align="center"> all books we have </h1>
 
-<% @books.each do|book| %>
-   <div class= "row">
-     <div class="col-xs-8 col-xs-offset-2">
-            <div class="well well-lg">
-                <div class="book-book">
-                    <%=link_to book.book,book_path(book)%>
-                </div>
-                <div class ="book-author">
-                <%=book.author%>
-                </div>
-                <div class "book-body">
-                    <%= truncate(book.description,lenth:100)%>
-                    <div class="book-meta-details">
-                        <small>Created by:<%= book.user.username if book.user%>,
-                            <%= time_ago_in_words( book.created_at)%> ago,
-                            last updated: <%= time_ago_in_words(book.updated_at) %> ago</small>
-                    </div>
-                </div>
-                <div class ="book-actions">
-                    <%= link_to"edit this book data", edit_book_path(book), class: "btn btn-xs btn-primary"%>
-                    <%= link_to"delete this book data", book_path(book),method: :delete, data: {confirm:"are u sure u wont delete this book"}, class: "btn btn-xs btn-danger"%>
-                </div>  
-            </div>
-        </div>
-    </div>
-
-<% end %>
+<%=render 'book',obj:@books%>
