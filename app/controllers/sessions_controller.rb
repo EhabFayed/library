@@ -1,12 +1,12 @@
-class SeccionsController < ApplicationController
+class SessionsController < ApplicationController
 
 def new 
 
 end 
 
 def create
-    user=User.find_by(email:params[:seccion][:email].downcase)
-    if user && user.authenticate(params[:seccion][:password])
+    user=User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
         session[:user_id]= user.id
         flash[:success]="ur are loged in "
         redirect_to user_path(user)
