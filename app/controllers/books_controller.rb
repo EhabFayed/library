@@ -1,12 +1,13 @@
 class BooksController < ApplicationController
+    before_action :set_book ,only: [:edit,:update,:show,:destroy]
+    before_action :require_user,exept:[:show,:index]
+    before_action :require_same_user,only: [:edit,:update,:destroy]
     #new handeled by creat action
     def new 
         @book=Book.new
     end
     #handeld by update action 
     def edit 
-        @book=Book.find(params[:id])
-    
     end
     def index 
         @books=Book.paginate(page: params[:page],per_page: 2)
@@ -14,7 +15,6 @@ class BooksController < ApplicationController
     end
     
     def update
-        @book=Book.find(params[:id])
         if @book.update(book_params)
             flash[:success] ="book data has been updated"
             redirect_to book_path(@book)
@@ -28,7 +28,7 @@ class BooksController < ApplicationController
         #show article after creation
         #redirect_to books_path(@book)
         @book=Book.new(book_params)
-        @book.user= User.first
+        @book.user= current_user
         if @book.save 
             flash[:success] ="book has been added successfully"
             redirect_to book_path(@book)
@@ -36,12 +36,9 @@ class BooksController < ApplicationController
             render 'new'
         end
     end
-    def show 
-        @book=Book.find(params[:id])
-        
+    def show
     end
     def destroy
-        @book=Book.find(params[:id])
         @book.destroy
         flash[:danger]="book has been deleted"
         redirect_to books_path
@@ -52,5 +49,14 @@ class BooksController < ApplicationController
     def book_params
         params.require(:book).permit(:book, :author, :description)
         
+    end
+    def set_book
+        @book=Book.find(params[:id])
+    end
+    def require_same_user
+        if current_user!= @book.user
+            flash[:danger]="u must be the user how donate this book t our liberary to update or take it again "
+            redirect_to root_path
+        end
     end
 end
