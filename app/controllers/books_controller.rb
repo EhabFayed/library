@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
     before_action :set_book ,only: [:edit,:update,:show,:destroy]
-    before_action :require_user,exept:[:show,:index]
+    before_action :require_user,except:[:show,:index]
     before_action :require_same_user,only: [:edit,:update,:destroy]
     #new handeled by creat action
     def new 
@@ -42,7 +42,6 @@ class BooksController < ApplicationController
         @book.destroy
         flash[:danger]="book has been deleted"
         redirect_to books_path
-    
     end
     
     private 
@@ -54,8 +53,8 @@ class BooksController < ApplicationController
         @book=Book.find(params[:id])
     end
     def require_same_user
-        if current_user!= @book.user
-            flash[:danger]="u must be the user how donate this book t our liberary to update or take it again "
+        if current_user!= @book.user and !current_user.admin?
+            flash[:danger]="u must be the user who donate this book t our liberary to update or take it again "
             redirect_to root_path
         end
     end
